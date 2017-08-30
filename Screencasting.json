@@ -1,7 +1,7 @@
 {
-    "current_program_scene": "Greenscreencast",
-    "current_scene": "Chromium",
-    "current_transition": "Cut",
+    "current_program_scene": "Screencast",
+    "current_scene": "Screencast",
+    "current_transition": "Fade",
     "modules": {
         "auto-scene-switcher": {
             "active": false,
@@ -104,10 +104,13 @@
     "scaling_mode": 0,
     "scene_order": [
         {
-            "name": "Greenscreencast"
+            "name": "Impressive"
         },
         {
             "name": "Chromium"
+        },
+        {
+            "name": "Screencast"
         }
     ],
     "sources": [
@@ -118,13 +121,318 @@
             "flags": 0,
             "hotkeys": {
                 "OBSBasic.SelectScene": [],
+                "libobs.hide_scene_item.Audio Input Capture (PulseAudio)": [],
                 "libobs.hide_scene_item.Blank white": [],
                 "libobs.hide_scene_item.DataLad": [],
-                "libobs.hide_scene_item.Video Capture Device (V4L2)": [],
+                "libobs.hide_scene_item.Screen Capture (XSHM)": [],
+                "libobs.hide_scene_item.Video - builtin camera": [],
+                "libobs.hide_scene_item.Video - external camera with green": [],
+                "libobs.hide_scene_item.Window Impressive": [],
+                "libobs.hide_scene_item.Window Terminal": [],
+                "libobs.hide_scene_item.Window chromium": [],
+                "libobs.hide_scene_item.Window xterm": [],
+                "libobs.show_scene_item.Audio Input Capture (PulseAudio)": [],
+                "libobs.show_scene_item.Blank white": [],
+                "libobs.show_scene_item.DataLad": [],
+                "libobs.show_scene_item.Screen Capture (XSHM)": [],
+                "libobs.show_scene_item.Video - builtin camera": [],
+                "libobs.show_scene_item.Video - external camera with green": [],
+                "libobs.show_scene_item.Window Impressive": [],
+                "libobs.show_scene_item.Window Terminal": [],
+                "libobs.show_scene_item.Window chromium": [],
+                "libobs.show_scene_item.Window xterm": []
+            },
+            "id": "scene",
+            "mixers": 0,
+            "monitoring_type": 0,
+            "muted": false,
+            "name": "Screencast",
+            "push-to-mute": false,
+            "push-to-mute-delay": 0,
+            "push-to-talk": false,
+            "push-to-talk-delay": 0,
+            "settings": {
+                "id_counter": 10,
+                "items": [
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 1,
+                        "name": "Blank white",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 2,
+                        "name": "Audio Input Capture (PulseAudio)",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 3,
+                        "name": "Screen Capture (XSHM)",
+                        "pos": {
+                            "x": -219.0,
+                            "y": -119.0
+                        },
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 0.65364581346511841,
+                            "y": 0.65370368957519531
+                        },
+                        "scale_filter": "disable",
+                        "visible": false
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 4,
+                        "name": "Window Impressive",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 5,
+                        "name": "Window Terminal",
+                        "pos": {
+                            "x": -8.0,
+                            "y": 0.0
+                        },
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": false
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 6,
+                        "name": "Window chromium",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": false
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 7,
+                        "name": "Window xterm",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": false
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 8,
+                        "name": "DataLad",
+                        "pos": {
+                            "x": 1068.0914306640625,
+                            "y": 0.0
+                        },
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 0.27437186241149902,
+                            "y": 0.27390182018280029
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 9,
+                        "name": "Video - external camera with green",
+                        "pos": {
+                            "x": 891.0,
+                            "y": 224.0
+                        },
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.3413792848587036,
+                            "y": 1.3405405282974243
+                        },
+                        "scale_filter": "disable",
+                        "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 10,
+                        "name": "Video - builtin camera",
+                        "pos": {
+                            "x": 891.0,
+                            "y": 501.0
+                        },
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 0.30390626192092896,
+                            "y": 0.30416667461395264
+                        },
+                        "scale_filter": "disable",
+                        "visible": false
+                    }
+                ]
+            },
+            "sync": 0,
+            "volume": 1.0
+        },
+        {
+            "deinterlace_field_order": 0,
+            "deinterlace_mode": 0,
+            "enabled": true,
+            "flags": 0,
+            "hotkeys": {
+                "OBSBasic.SelectScene": [],
+                "libobs.hide_scene_item.Blank white": [],
+                "libobs.hide_scene_item.DataLad": [],
+                "libobs.hide_scene_item.Video - external camera with green": [],
                 "libobs.hide_scene_item.Window chromium": [],
                 "libobs.show_scene_item.Blank white": [],
                 "libobs.show_scene_item.DataLad": [],
-                "libobs.show_scene_item.Video Capture Device (V4L2)": [],
+                "libobs.show_scene_item.Video - external camera with green": [],
                 "libobs.show_scene_item.Window chromium": []
             },
             "id": "scene",
@@ -204,15 +512,15 @@
                         "crop_right": 0,
                         "crop_top": 0,
                         "id": 3,
-                        "name": "Video Capture Device (V4L2)",
+                        "name": "Video - external camera with green",
                         "pos": {
-                            "x": 1027.608642578125,
-                            "y": 478.0
+                            "x": 1023.0,
+                            "y": 392.0
                         },
                         "rot": 0.0,
                         "scale": {
-                            "x": 0.73260867595672607,
-                            "y": 0.73333334922790527
+                            "x": 0.88620692491531372,
+                            "y": 0.8864864706993103
                         },
                         "scale_filter": "disable",
                         "visible": true
@@ -241,7 +549,7 @@
                             "y": 0.27390182018280029
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     }
                 ]
             },
@@ -336,7 +644,7 @@
                     "push-to-talk": false,
                     "push-to-talk-delay": 0,
                     "settings": {
-                        "left": 110,
+                        "left": 90,
                         "right": 75
                     },
                     "sync": 0,
@@ -448,10 +756,10 @@
                     "push-to-talk": false,
                     "push-to-talk-delay": 0,
                     "settings": {
-                        "bottom": 140,
-                        "left": 130,
+                        "bottom": 100,
+                        "left": 200,
                         "relative": true,
-                        "right": 130,
+                        "right": 150,
                         "top": 10
                     },
                     "sync": 0,
@@ -473,11 +781,13 @@
                     "push-to-talk": false,
                     "push-to-talk-delay": 0,
                     "settings": {
-                        "key_color": 4281655946,
+                        "contrast": 0.070000000000000007,
+                        "key_color": 4288404919,
                         "key_color_type": "green",
                         "opacity": 98,
-                        "similarity": 432,
-                        "smoothness": 90
+                        "similarity": 453,
+                        "smoothness": 69,
+                        "spill": 1
                     },
                     "sync": 0,
                     "volume": 1.0
@@ -489,7 +799,7 @@
             "mixers": 0,
             "monitoring_type": 0,
             "muted": false,
-            "name": "Video Capture Device (V4L2)",
+            "name": "Video - external camera with green",
             "push-to-mute": false,
             "push-to-mute-delay": 0,
             "push-to-talk": false,
@@ -497,7 +807,8 @@
             "settings": {
                 "device_id": "/dev/video1",
                 "input": 0,
-                "pixelformat": 1448695129
+                "pixelformat": 1448695129,
+                "resolution": 41943520
             },
             "sync": 0,
             "volume": 1.0
@@ -600,32 +911,34 @@
                 "libobs.hide_scene_item.Blank white": [],
                 "libobs.hide_scene_item.DataLad": [],
                 "libobs.hide_scene_item.Screen Capture (XSHM)": [],
-                "libobs.hide_scene_item.Video Capture Device (V4L2)": [],
-                "libobs.hide_scene_item.Video Capture Device (V4L2) 1": [],
-                "libobs.hide_scene_item.Window Capture (Xcomposite)": [],
+                "libobs.hide_scene_item.Video - builtin camera": [],
+                "libobs.hide_scene_item.Video - external camera with green": [],
                 "libobs.hide_scene_item.Window Impressive": [],
+                "libobs.hide_scene_item.Window Terminal": [],
                 "libobs.hide_scene_item.Window chromium": [],
+                "libobs.hide_scene_item.Window xterm": [],
                 "libobs.show_scene_item.Audio Input Capture (PulseAudio)": [],
                 "libobs.show_scene_item.Blank white": [],
                 "libobs.show_scene_item.DataLad": [],
                 "libobs.show_scene_item.Screen Capture (XSHM)": [],
-                "libobs.show_scene_item.Video Capture Device (V4L2)": [],
-                "libobs.show_scene_item.Video Capture Device (V4L2) 1": [],
-                "libobs.show_scene_item.Window Capture (Xcomposite)": [],
+                "libobs.show_scene_item.Video - builtin camera": [],
+                "libobs.show_scene_item.Video - external camera with green": [],
                 "libobs.show_scene_item.Window Impressive": [],
-                "libobs.show_scene_item.Window chromium": []
+                "libobs.show_scene_item.Window Terminal": [],
+                "libobs.show_scene_item.Window chromium": [],
+                "libobs.show_scene_item.Window xterm": []
             },
             "id": "scene",
             "mixers": 0,
             "monitoring_type": 0,
             "muted": false,
-            "name": "Greenscreencast",
+            "name": "Impressive",
             "push-to-mute": false,
             "push-to-mute-delay": 0,
             "push-to-talk": false,
             "push-to-talk-delay": 0,
             "settings": {
-                "id_counter": 9,
+                "id_counter": 13,
                 "items": [
                     {
                         "align": 5,
@@ -691,32 +1004,6 @@
                         "crop_left": 0,
                         "crop_right": 0,
                         "crop_top": 0,
-                        "id": 2,
-                        "name": "Video Capture Device (V4L2) 1",
-                        "pos": {
-                            "x": -407.0,
-                            "y": -494.0
-                        },
-                        "rot": 0.0,
-                        "scale": {
-                            "x": 3.1953125,
-                            "y": 3.1937499046325684
-                        },
-                        "scale_filter": "disable",
-                        "visible": false
-                    },
-                    {
-                        "align": 5,
-                        "bounds": {
-                            "x": 0.0,
-                            "y": 0.0
-                        },
-                        "bounds_align": 0,
-                        "bounds_type": 0,
-                        "crop_bottom": 0,
-                        "crop_left": 0,
-                        "crop_right": 0,
-                        "crop_top": 0,
                         "id": 4,
                         "name": "Screen Capture (XSHM)",
                         "pos": {
@@ -730,32 +1017,6 @@
                         },
                         "scale_filter": "disable",
                         "visible": false
-                    },
-                    {
-                        "align": 5,
-                        "bounds": {
-                            "x": 0.0,
-                            "y": 0.0
-                        },
-                        "bounds_align": 0,
-                        "bounds_type": 0,
-                        "crop_bottom": 0,
-                        "crop_left": 0,
-                        "crop_right": 0,
-                        "crop_top": 0,
-                        "id": 7,
-                        "name": "DataLad",
-                        "pos": {
-                            "x": 1041.0,
-                            "y": 0.0
-                        },
-                        "rot": 0.0,
-                        "scale": {
-                            "x": 0.27437186241149902,
-                            "y": 0.27390182018280029
-                        },
-                        "scale_filter": "disable",
-                        "visible": true
                     },
                     {
                         "align": 5,
@@ -795,10 +1056,10 @@
                         "crop_left": 0,
                         "crop_right": 0,
                         "crop_top": 0,
-                        "id": 9,
-                        "name": "Window chromium",
+                        "id": 5,
+                        "name": "Window Terminal",
                         "pos": {
-                            "x": 0.0,
+                            "x": -8.0,
                             "y": 0.0
                         },
                         "rot": 0.0,
@@ -807,7 +1068,7 @@
                             "y": 1.0
                         },
                         "scale_filter": "disable",
-                        "visible": true
+                        "visible": false
                     },
                     {
                         "align": 5,
@@ -821,8 +1082,8 @@
                         "crop_left": 0,
                         "crop_right": 0,
                         "crop_top": 0,
-                        "id": 5,
-                        "name": "Window Terminal",
+                        "id": 9,
+                        "name": "Window chromium",
                         "pos": {
                             "x": 0.0,
                             "y": 0.0
@@ -831,6 +1092,58 @@
                         "scale": {
                             "x": 1.0,
                             "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": false
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 12,
+                        "name": "Window xterm",
+                        "pos": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        },
+                        "scale_filter": "disable",
+                        "visible": false
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 7,
+                        "name": "DataLad",
+                        "pos": {
+                            "x": 1068.0914306640625,
+                            "y": 0.0
+                        },
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 0.27437186241149902,
+                            "y": 0.27390182018280029
                         },
                         "scale_filter": "disable",
                         "visible": true
@@ -848,43 +1161,46 @@
                         "crop_right": 0,
                         "crop_top": 0,
                         "id": 3,
-                        "name": "Video Capture Device (V4L2)",
+                        "name": "Video - external camera with green",
                         "pos": {
-                            "x": 1027.608642578125,
-                            "y": 478.0
+                            "x": 891.0,
+                            "y": 224.0
                         },
                         "rot": 0.0,
                         "scale": {
-                            "x": 0.73260867595672607,
-                            "y": 0.73333334922790527
+                            "x": 1.3413792848587036,
+                            "y": 1.3405405282974243
                         },
                         "scale_filter": "disable",
                         "visible": true
+                    },
+                    {
+                        "align": 5,
+                        "bounds": {
+                            "x": 0.0,
+                            "y": 0.0
+                        },
+                        "bounds_align": 0,
+                        "bounds_type": 0,
+                        "crop_bottom": 0,
+                        "crop_left": 0,
+                        "crop_right": 0,
+                        "crop_top": 0,
+                        "id": 13,
+                        "name": "Video - builtin camera",
+                        "pos": {
+                            "x": 891.0,
+                            "y": 501.0
+                        },
+                        "rot": 0.0,
+                        "scale": {
+                            "x": 0.30390626192092896,
+                            "y": 0.30416667461395264
+                        },
+                        "scale_filter": "disable",
+                        "visible": false
                     }
                 ]
-            },
-            "sync": 0,
-            "volume": 1.0
-        },
-        {
-            "deinterlace_field_order": 0,
-            "deinterlace_mode": 0,
-            "enabled": true,
-            "flags": 0,
-            "hotkeys": {},
-            "id": "v4l2_input",
-            "mixers": 0,
-            "monitoring_type": 0,
-            "muted": false,
-            "name": "Video Capture Device (V4L2) 1",
-            "push-to-mute": false,
-            "push-to-mute-delay": 0,
-            "push-to-talk": false,
-            "push-to-talk-delay": 0,
-            "settings": {
-                "device_id": "/dev/video0",
-                "input": 0,
-                "pixelformat": 1448695129
             },
             "sync": 0,
             "volume": 1.0
@@ -911,8 +1227,83 @@
             },
             "sync": 0,
             "volume": 1.0
+        },
+        {
+            "deinterlace_field_order": 0,
+            "deinterlace_mode": 0,
+            "enabled": true,
+            "flags": 0,
+            "hotkeys": {},
+            "id": "xcomposite_input",
+            "mixers": 0,
+            "monitoring_type": 0,
+            "muted": false,
+            "name": "Window xterm",
+            "push-to-mute": false,
+            "push-to-mute-delay": 0,
+            "push-to-talk": false,
+            "push-to-talk-delay": 0,
+            "settings": {
+                "capture_window": "119537700\r\nScreencast-xterm\r\nxterm",
+                "swap_redblue": true
+            },
+            "sync": 0,
+            "volume": 1.0
+        },
+        {
+            "deinterlace_field_order": 0,
+            "deinterlace_mode": 0,
+            "enabled": true,
+            "filters": [
+                {
+                    "deinterlace_field_order": 0,
+                    "deinterlace_mode": 0,
+                    "enabled": true,
+                    "flags": 0,
+                    "hotkeys": {},
+                    "id": "chroma_key_filter",
+                    "mixers": 0,
+                    "monitoring_type": 0,
+                    "muted": false,
+                    "name": "Chroma Key",
+                    "push-to-mute": false,
+                    "push-to-mute-delay": 0,
+                    "push-to-talk": false,
+                    "push-to-talk-delay": 0,
+                    "settings": {
+                        "brightness": -0.73999999999999999,
+                        "contrast": 0.64000000000000001,
+                        "gamma": -0.28000000000000003,
+                        "key_color": 4286941832,
+                        "key_color_type": "custom",
+                        "similarity": 1,
+                        "smoothness": 69,
+                        "spill": 579
+                    },
+                    "sync": 0,
+                    "volume": 1.0
+                }
+            ],
+            "flags": 0,
+            "hotkeys": {},
+            "id": "v4l2_input",
+            "mixers": 0,
+            "monitoring_type": 0,
+            "muted": false,
+            "name": "Video - builtin camera",
+            "push-to-mute": false,
+            "push-to-mute-delay": 0,
+            "push-to-talk": false,
+            "push-to-talk-delay": 0,
+            "settings": {
+                "device_id": "/dev/video0",
+                "input": 0,
+                "pixelformat": 1448695129
+            },
+            "sync": 0,
+            "volume": 1.0
         }
     ],
-    "transition_duration": 300,
+    "transition_duration": 600,
     "transitions": []
 }
