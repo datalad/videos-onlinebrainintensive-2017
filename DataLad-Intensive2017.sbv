@@ -1,32 +1,50 @@
-0:00:02.920,0:00:09.750
-My name is Yaroslav Halchenko and I am talking to you from Dartmouth about DataLad project.
+0:00:02.920,0:00:05.121
+My name is Yaroslav Halchenko
+
+0:00:05.121,0:00:09.750
+and I am talking to you from Dartmouth about DataLad project.
 
 0:00:10.299,0:00:14.099
 This project was initiated by me and Michael Hanke from Germany
 
-0:00:14.099,0:00:21.028
-and we had successful few years of collaboration. Before that you might know about us
+0:00:14.099,0:00:18.141
+and we had successful few years of collaboration.
+
+0:00:18.141,0:00:22.000
+Before that you might  know us
 
 0:00:22.480,0:00:24.599
 because of our other projects such as PyMVPA and NeuroDebian.
 
-0:00:25.140,0:00:30.129
-I hope that you use them and they help you in your research projects.
+0:00:25.140,0:00:26.901
+I hope that you use them
+
+0:00:26.901,0:00:30.129
+and they help you in your research projects.
 
 0:00:30.129,0:00:32.660
 More about these and other projects
 
-0:00:32.660,0:00:37.680
-You could discover if you go to the centerforopenneuroscience.org website, or you could also find
+0:00:32.660,0:00:36.530
+You could discover if you go to the centerforopenneuroscience.org website,
+
+0:00:36.530,0:00:37.680
+or you could also find
 
 0:00:37.860,0:00:43.100
 contacts for us in social media and before I proceed with the talk
 
-0:00:43.110,0:00:49.650
-I want first of all acknowledge work of others and the project. It wasn't only my and Michael's work
+0:00:43.110,0:00:47.272
+I want first of all acknowledge work of others on the project.
 
-0:00:51.580,0:00:57.659
-Our project is heavily based on Git-annex tool, which Joey Hess wrote for managing his own collection of files
+0:00:47.272,0:00:49.650
+It wasn't only my and Michael's work
+
+0:00:51.580,0:00:54.201
+Our project is heavily based on Git-annex tool,
+
+0:00:54.201,0:00:57.659
+which Joey Hess wrote for managing his own collection of files
 
 0:00:58.060,0:01:00.269
 which has nothing to do with science.
@@ -35,13 +53,16 @@ which has nothing to do with science.
 Also, he is well known for his work in Debian project
 
 0:01:04.600,0:01:09.390
-We had, we still have tireless workers on a project
+We had... we still have tireless workers on a project
 
 0:01:09.909,0:01:11.020
 Benjamin
 
-0:01:11.020,0:01:16.920
-working with Michael and Alex. Alex recently refurbished or wrote from scratch a new version of the website
+0:01:11.020,0:01:14.140
+working with Michael and Alex.
+
+0:01:14.140,0:01:16.920
+Alex recently refurbished or wrote from scratch a new version of the website
 
 0:01:16.920,0:01:20.249
 I hope that you'll like it and we'll see a bit more of it later.
@@ -52,11 +73,17 @@ Also, we had Jason, Debanjum and Gergana working on the project.
 0:01:26.469,0:01:30.299
 They were quite successful to accomplish a lot within short period of time
 
-0:01:31.119,0:01:37.199
-So if you're looking for a project to contribute to it might be the interesting project for you to start
+0:01:31.119,0:01:33.260
+So if you're looking for a project to contribute to
 
-0:01:37.740,0:01:42.200
-working on open source projects and leave in kind of your foot step in the
+0:01:33.260,0:01:37.199
+it might be the interesting project for you to start
+
+0:01:37.740,0:01:39.600
+working on open source projects
+
+0:01:39.600,0:01:42.200
+and leave in kind of your foot step in the
 
 0:01:42.260,0:01:46.160
 ecosystem of Open Source for Neuroscience.
@@ -76,8 +103,11 @@ interesting and exciting projects we either collaborate with it or contribute to
 0:02:06.369,0:02:12.239
 Before we proceed I want actually to formulate the problem we are trying to solve DataLad.
 
-0:02:12.970,0:02:18.499
-Data is second class citizen within software platforms. What could that potentially be?
+0:02:12.970,0:02:16.506
+Data is second class citizen within software platforms.
+
+0:02:16.506,0:02:18.499
+What could that potentially be?
 
 0:02:20.310,0:02:25.009
 One of the aspects is if you look how people distribute data nowadays
@@ -85,17 +115,23 @@ One of the aspects is if you look how people distribute data nowadays
 0:02:25.710,0:02:32.239
 Quite often you find that even large arrays of data are distributed in tarballs or zip files.
 
-0:02:34.110,0:02:40.249
-Problems were multiple with these ways of distribution if one file changes you need to re-distribute
+0:02:34.110,0:02:37.459
+Problems were multiple with these ways of distribution
 
-0:02:40.820,0:02:48.120
-Entire tarball which might be gigabytes in size, and that's why partially we also couldn't just adopt
+0:02:37.459,0:02:40.249
+if one file changes you need to re-distribute
+
+0:02:40.820,0:02:42.540
+Entire tarball which might be gigabytes in size,
+
+0:02:42.540,0:02:48.120
+and that's why partially we also couldn't just adopt
 
 0:02:48.720,0:02:50.130
 technologies which are
 
 0:02:50.130,0:02:54.840
-Proven to work for software, let's say in Debian we distribute complete packages.
+proven to work for software, let's say in Debian we distribute complete packages.
 
 0:02:54.980,0:02:56.420
 But again the problem is the same.
@@ -296,7 +332,7 @@ What we're trying to achieve is to make managing of the data as easy as managing
 Is it possible? I hope that you'll see that it is so
 
 0:08:22.300,0:08:23.350
-
+ 
 
 0:08:23.350,0:08:25.350
 What DataLad is based on...
@@ -305,7 +341,7 @@ What DataLad is based on...
 Is in two pieces and one of them is Git. I hope that everybody knows what Git is.
 
 0:08:31.900,0:08:33.010
-
+ 
 
 0:08:33.010,0:08:38.369
 But I'll give small presentation nevertheless. So Git is a version control system
@@ -532,17 +568,20 @@ In our project we don't use it yet, but we do use it locally for synchronizing
 0:15:07.700,0:15:10.020
 different git-annex repositories.
 
-0:15:12.380,0:15:15.309
+0:15:12.380,0:15:15.300
 But another problem here, so we have really
 
-0:15:16.120,0:15:21.180
-Great two tools Git and git-annex, but both of them work on a single repository level.
+0:15:20.540,0:15:21.180
+great two tools Git and git-annex, but both of them work on a single repository level.
 
 0:15:21.340,0:15:26.560
 So, the work in a git repository you need to go into that directory and
 
-0:15:27.320,0:15:33.400
-Accomplish whatever you want to do. It kind of doesn't go along well with the notion of distribution
+0:15:27.320,0:15:29.500
+Accomplish whatever you want to do.
+
+0:15:29.500,0:15:33.400
+It kind of doesn't go along well with the notion of distribution
 
 0:15:33.840,0:15:38.760
 You don't care where you are you just want to, on your  hard drive, so you just want to say:
@@ -562,14 +601,23 @@ Also another kind of aspect those are just tools  so similarly like
 0:15:57.120,0:16:02.820
 how GitHub provided convenient portal to the tool git.
 
-0:16:03.760,0:16:09.620
-We want to accomplish something where we use these tools which are agnostic of domain of the data
+0:16:03.760,0:16:07.178
+We want to accomplish something where we use these tools
 
-0:16:09.630,0:16:16.410
-(let's say neuroimaging) to give you guys access to those terabytes of publicly shared data already
+0:16:07.178,0:16:09.620
+which are agnostic of domain of the data
 
-0:16:16.720,0:16:21.569
-Which lives out there somewhere, so we don't need to collect it. We don't need to
+0:16:09.630,0:16:11.290
+(let's say neuroimaging)
+
+0:16:11.290,0:16:16.410
+to give you guys access to those terabytes of publicly shared data already
+
+0:16:16.720,0:16:19.920
+which lives out there somewhere,
+
+0:16:19.920,0:16:21.569
+so we don't need to collect it. We don't need to
 
 0:16:22.270,0:16:26.309
 make copy of it locally, right, it's already there, so
@@ -1411,17 +1459,29 @@ Let me clear the screen and go to that directory
 0:39:58.000,0:40:00.299
 So now we don't have to specify
 
-0:40:01.539,0:40:08.669
-Location of the data set explicitly, and we could just type the same query without -d and it will provide the same results
+0:40:01.539,0:40:03.660
+Location of the data set explicitly,
 
-0:40:13.420,0:40:19.200
-Instead of listing all matching fields, let's say in our case it was "author" field, we could
+0:40:03.660,0:40:07.360
+and we could just type the same query without -d
+
+0:40:07.360,0:40:08.669
+and it will provide the same results
+
+0:40:13.420,0:40:15.160
+Instead of listing all matching fields,
+
+0:40:15.160,0:40:19.200
+let's say in our case it was "author" field, we could
 
 0:40:20.019,0:40:25.409
-Explicitly specify which fields you want to search through or to report.
+explicitly specify which fields you want to search through or to report.
 
-0:40:26.289,0:40:31.319
-So in this case, I want to see what's the name of the dataset and what is the author of the dataset?
+0:40:26.289,0:40:27.813
+So in this case, I want to see
+
+0:40:27.813,0:40:31.319
+what's the name of the dataset and what is the author of the dataset?
 
 0:40:31.319,0:40:33.989
 It's already the author, but with didn't see the name.
@@ -1430,28 +1490,34 @@ It's already the author, but with didn't see the name.
 And you're on the command to get the output with those fields included
 
 0:40:41.710,0:40:43.630
-Well enough of searching
+Well enough of searching!
 
 0:40:43.630,0:40:47.369
-Let's clear the screen and what we could do now we found
+Let's clear the screen and what we could do now -- we found
 
 0:40:47.680,0:40:51.539
-The data sets right it seems to be that the list of data sets which we found
+the datasets right it seems to be that the list of data sets which we found
 
 0:40:52.360,0:40:55.860
 is good to be installed and we could just
 
-0:40:56.760,0:41:05.680
-rely on a paradigm of Linux where you compose commands together through by using pipe command.
+0:40:56.760,0:40:59.350
+rely on a paradigm of Linux
+
+0:40:59.350,0:41:05.680
+where you compose commands together through by using pipe command.
 
 0:41:05.860,0:41:08.900
 So, what this magic would do?
 
 0:41:08.900,0:41:16.560
-If we didn't have these which already what happens right so we get only the list of data sets or past
+If we didn't have these which already what happens -- we get only the list of data sets or past
 
-0:41:16.690,0:41:24.569
-Those which are not installed yet, and so OpenfMRI directory is still empty so we get the list of data sets
+0:41:16.690,0:41:22.560
+Those which are not installed yet,
+
+0:41:22.560,0:41:24.569
+and OpenfMRI directory is still empty so we get the list of data sets
 
 0:41:25.320,0:41:29.060
 But then instead of manually going and doing:
@@ -1460,7 +1526,7 @@ But then instead of manually going and doing:
 "datalad install openfmri/ds00233"...
 
 0:41:33.980,0:41:39.060
-Or doing copy-paste, we could just say that result of this command
+or doing copy-paste, we could just say that result of this command
 
 0:41:39.400,0:41:41.400
 should be passed as
@@ -1468,8 +1534,11 @@ should be passed as
 0:41:41.400,0:41:45.760
 Arguments to the next command which will be "datalad install".
 
-0:41:45.760,0:41:51.140
-"datalad install" command installs those data sets which are either specified by the
+0:41:45.760,0:41:48.680
+"datalad install" command installs those datasets
+
+0:41:48.680,0:41:51.140
+which are either specified by the
 
 0:41:51.819,0:41:56.069
 path within current data set or you could provide URLs to
@@ -1631,7 +1700,7 @@ but those where we requested additional data files to be obtained finally list h
 we have in the working tree
 
 0:47:47.070,0:47:50.059
-of those data sets. 
+of those data sets.
 
 0:47:51.120,0:47:54.739
 That would complete the demo for "search" and "install".
@@ -1761,3 +1830,4 @@ You're welcome to contribute, the project is open source.
 
 0:51:29.240,0:51:36.790
 I hope that after you've seen the presentation you will agree that managing data can be as simple as manage encode and software. Thank you!
+
