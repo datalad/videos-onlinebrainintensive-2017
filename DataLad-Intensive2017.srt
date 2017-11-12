@@ -1,0 +1,2444 @@
+1
+00:00:02,920 --> 00:00:05,121
+My name is Yaroslav Halchenko
+
+2
+00:00:05,121 --> 00:00:09,750
+and I am talking to you from Dartmouth about DataLad project.
+
+3
+00:00:10,299 --> 00:00:14,099
+This project was initiated by me and Michael Hanke from Germany
+
+4
+00:00:14,099 --> 00:00:18,141
+and we had successful few years of collaboration.
+
+5
+00:00:18,141 --> 00:00:22,000
+Before that you might  know us
+
+6
+00:00:22,480 --> 00:00:24,599
+because of our other projects such as PyMVPA and NeuroDebian.
+
+7
+00:00:25,140 --> 00:00:26,901
+I hope that you use them
+
+8
+00:00:26,901 --> 00:00:30,129
+and they help you in your research projects.
+
+9
+00:00:30,129 --> 00:00:32,660
+More about these and other projects
+
+10
+00:00:32,660 --> 00:00:36,530
+You could discover if you go to the centerforopenneuroscience.org website,
+
+11
+00:00:36,530 --> 00:00:37,680
+or you could also find
+
+12
+00:00:37,860 --> 00:00:43,100
+contacts for us in social media and before I proceed with the talk
+
+13
+00:00:43,110 --> 00:00:47,272
+I want first of all acknowledge work of others on the project.
+
+14
+00:00:47,272 --> 00:00:49,650
+It wasn't only my and Michael's work
+
+15
+00:00:51,580 --> 00:00:54,201
+Our project is heavily based on Git-annex tool,
+
+16
+00:00:54,201 --> 00:00:57,659
+which Joey Hess wrote for managing his own collection of files
+
+17
+00:00:58,060 --> 00:01:00,269
+which has nothing to do with science.
+
+18
+00:01:01,240 --> 00:01:04,229
+Also, he is well known for his work in Debian project
+
+19
+00:01:04,600 --> 00:01:09,390
+We had... we still have tireless workers on a project
+
+20
+00:01:09,909 --> 00:01:11,020
+Benjamin
+
+21
+00:01:11,020 --> 00:01:14,140
+working with Michael and Alex.
+
+22
+00:01:14,140 --> 00:01:16,920
+Alex recently refurbished or wrote from scratch a new version of the website
+
+23
+00:01:16,920 --> 00:01:20,249
+I hope that you'll like it and we'll see a bit more of it later.
+
+24
+00:01:21,490 --> 00:01:25,439
+Also, we had Jason, Debanjum and Gergana working on the project.
+
+25
+00:01:26,469 --> 00:01:30,299
+They were quite successful to accomplish a lot within short period of time
+
+26
+00:01:31,119 --> 00:01:33,260
+So if you're looking for a project to contribute to
+
+27
+00:01:33,260 --> 00:01:37,199
+it might be the interesting project for you to start
+
+28
+00:01:37,740 --> 00:01:39,600
+working on open source projects
+
+29
+00:01:39,600 --> 00:01:42,200
+and leave in kind of your foot step in the
+
+30
+00:01:42,260 --> 00:01:46,160
+ecosystem of Open Source for Neuroscience.
+
+31
+00:01:46,160 --> 00:01:49,920
+This project is supported by NSF and
+
+32
+00:01:50,100 --> 00:01:53,960
+Federal Finistry for Education and Research in Germany.
+
+33
+00:01:54,400 --> 00:02:00,160
+If you go to centerforopenneuroscience.org you could discover more
+
+34
+00:02:00,380 --> 00:02:04,500
+interesting and exciting projects we either collaborate with it or contribute to.
+
+35
+00:02:06,369 --> 00:02:12,239
+Before we proceed I want actually to formulate the problem we are trying to solve DataLad.
+
+36
+00:02:12,970 --> 00:02:16,506
+Data is second class citizen within software platforms.
+
+37
+00:02:16,506 --> 00:02:18,499
+What could that potentially be?
+
+38
+00:02:20,310 --> 00:02:25,009
+One of the aspects is if you look how people distribute data nowadays
+
+39
+00:02:25,710 --> 00:02:32,239
+Quite often you find that even large arrays of data are distributed in tarballs or zip files.
+
+40
+00:02:34,110 --> 00:02:37,459
+Problems were multiple with these ways of distribution
+
+41
+00:02:37,459 --> 00:02:40,249
+if one file changes you need to re-distribute
+
+42
+00:02:40,820 --> 00:02:42,540
+Entire tarball which might be gigabytes in size,
+
+43
+00:02:42,540 --> 00:02:48,120
+and that's why partially we also couldn't just adopt
+
+44
+00:02:48,720 --> 00:02:50,130
+technologies which are
+
+45
+00:02:50,130 --> 00:02:54,840
+proven to work for software, let's say in Debian we distribute complete packages.
+
+46
+00:02:54,980 --> 00:02:56,420
+But again the problem is the same.
+
+47
+00:02:56,660 --> 00:02:59,160
+As long as you force
+
+48
+00:02:59,360 --> 00:03:04,220
+wrapping all the data together in some big file - it wouldn't work. It won't scale.
+
+49
+00:03:06,060 --> 00:03:09,023
+Also another problem is absent version of data.
+
+50
+00:03:09,023 --> 00:03:15,060
+And many people actually underappreciate it and think that it doesn't actually exist
+
+51
+00:03:15,060 --> 00:03:21,780
+or relates to their way of work. But no, actually this problem is quite generic.
+
+52
+00:03:22,920 --> 00:03:24,920
+So if you look into this
+
+53
+00:03:25,620 --> 00:03:30,860
+PhD comics caricature, you'll find that these probably relates to many
+
+54
+00:03:32,549 --> 00:03:35,209
+ways how you deal with files, data or
+
+55
+00:03:35,880 --> 00:03:39,079
+documents. And you could see that actually
+
+56
+00:03:39,930 --> 00:03:47,600
+how we tend to version our data is by providing - quite often - the date, right, which creates some kind of linear progression.
+
+57
+00:03:48,239 --> 00:03:50,539
+Right, so we annotate that: "Oh!"
+
+58
+00:03:51,540 --> 00:03:56,209
+"I've worked on these in those dates, but also maybe a little bit later..."
+
+59
+00:03:56,209 --> 00:04:01,129
+And we try to annotate it with some description of what was maybe done to the data
+
+60
+00:04:01,380 --> 00:04:04,399
+Right, so in this case. It was a test run
+
+61
+00:04:04,400 --> 00:04:09,890
+Then we test it again and calibrate it and then we ran into a problem, right? So...
+
+62
+00:04:10,470 --> 00:04:16,519
+All these, kind of, you saved the result of your work and annotated so later on you could
+
+63
+00:04:17,010 --> 00:04:23,779
+either get back to the previous state. Let's say maybe you indeed made an error and you want to rollback.
+
+64
+00:04:24,419 --> 00:04:29,939
+Or maybe you want to just compare what have you done, which broke your code or data?
+
+65
+00:04:30,700 --> 00:04:34,770
+Right, and as you could see those messages could be quite descriptive.
+
+66
+00:04:35,830 --> 00:04:43,679
+But the problem is that version control systems which are created for code are inadequate for data, right? So the problem is,
+
+67
+00:04:44,200 --> 00:04:51,029
+quite often, that it's duplication you have copy of the data in the version control system inside somewhere
+
+68
+00:04:51,030 --> 00:04:52,450
+so you couldn't use it directly.
+
+69
+00:04:52,450 --> 00:04:57,440
+But also it's present on your hard drive, so at least you have two copies quite often.
+
+70
+00:04:57,600 --> 00:05:02,520
+Or maybe it's duplicated and just on a single server, right?
+
+71
+00:05:03,010 --> 00:05:09,330
+I could give you examples were data in a version control system filled up the version control system and
+
+72
+00:05:09,940 --> 00:05:12,480
+meanwhile filling up the hard drive and
+
+73
+00:05:13,180 --> 00:05:19,770
+sometimes you try to commit new file and apparently ran out of space on the server and it might ruin your
+
+74
+00:05:20,110 --> 00:05:22,319
+version control back and then on the server
+
+75
+00:05:23,020 --> 00:05:28,409
+Rendering it impossible to get to the previous version, so you don't want to have that, right?
+
+76
+00:05:29,830 --> 00:05:37,770
+Then another problem is that there are no generic data distributions or at least there were no before DataLad.
+
+77
+00:05:38,110 --> 00:05:40,410
+So there is no efficient ways to
+
+78
+00:05:41,170 --> 00:05:43,259
+install and upgrade data sets and
+
+79
+00:05:44,740 --> 00:05:52,109
+When you also deal with different data hosting portals you need to learn how to navigate them
+
+80
+00:05:52,110 --> 00:05:52,470
+All right
+
+81
+00:05:52,470 --> 00:05:53,830
+you need to learn how you
+
+82
+00:05:53,830 --> 00:06:00,149
+authenticate, which page you need to go to and what to download and how to download it?
+
+83
+00:06:00,340 --> 00:06:03,750
+So just to get to that data set. And then, maybe you
+
+84
+00:06:05,230 --> 00:06:08,129
+get the announcement that dataset was fixed
+
+85
+00:06:08,130 --> 00:06:14,309
+and you need to repeat this over and over again trying to remember how to deal with it. And I'm not talking even if
+
+86
+00:06:14,920 --> 00:06:22,379
+the website became much better and sleeker and changed all the ways how it actually deals with downloads from what it did before.
+
+87
+00:06:23,980 --> 00:06:27,029
+Another aspect that data is rarely tested
+
+88
+00:06:27,160 --> 00:06:29,999
+So what does it mean for data to have bugs?
+
+89
+00:06:30,340 --> 00:06:36,210
+Any derived data is a product of running a script or some kind of procedure on
+
+90
+00:06:36,880 --> 00:06:39,839
+original data and generating new derived data.
+
+91
+00:06:40,990 --> 00:06:44,939
+Quite permanent ones which you could find in references later on in this presentation
+
+92
+00:06:45,460 --> 00:06:52,079
+is atlases. So Atlas is usually produced from the data writing some really sophisticated script
+
+93
+00:06:52,330 --> 00:06:53,920
+which generates new data:
+
+94
+00:06:53,920 --> 00:06:56,819
+the atlas. And those atlases could be buggy.
+
+95
+00:06:57,160 --> 00:07:03,630
+So how do you test the data? The same way as software. If we could establish this efficient process where we
+
+96
+00:07:04,630 --> 00:07:08,999
+produce some data and verify that at least data meets the assumptions
+
+97
+00:07:09,000 --> 00:07:12,869
+which you expect. If it's population or probability in the area
+
+98
+00:07:12,870 --> 00:07:15,990
+which must be present in the entirety of population,
+
+99
+00:07:16,060 --> 00:07:21,300
+then operability should be up to 100 or nearby 100. If it doesn't add up,
+
+100
+00:07:22,060 --> 00:07:25,020
+then you have a bug. It's really simple assumption
+
+101
+00:07:25,020 --> 00:07:28,145
+But very verifying that your data doesn't have...
+
+102
+00:07:28,145 --> 00:07:30,779
+Doesn't break those is really important.
+
+103
+00:07:32,140 --> 00:07:38,729
+Unified way how we deal with data, and the code could help to establish those data testing procedures.
+
+104
+00:07:39,580 --> 00:07:46,619
+Also, it's quite difficult to share your derived data. If downloaded some data set from an well known portal...
+
+105
+00:07:46,720 --> 00:07:50,160
+How do you share it? What data could be shared?
+
+106
+00:07:51,100 --> 00:07:53,340
+Where do you deposit it so people later on
+
+107
+00:07:53,830 --> 00:07:59,819
+Could download maybe original data, and your derive data without even worrying that oh
+
+108
+00:07:59,820 --> 00:08:04,710
+They need to get this piece from an original source and your derived data from another place
+
+109
+00:08:05,110 --> 00:08:09,119
+So how do we link those pieces together to make it convenient?
+
+110
+00:08:10,210 --> 00:08:17,279
+What we're trying to achieve is to make managing of the data as easy as managing code and software.
+
+111
+00:08:18,430 --> 00:08:21,690
+Is it possible? I hope that you'll see that it is so
+
+112
+00:08:22,300 --> 00:08:23,350
+ 
+
+113
+00:08:23,350 --> 00:08:25,350
+What DataLad is based on...
+
+114
+00:08:25,780 --> 00:08:31,380
+Is in two pieces and one of them is Git. I hope that everybody knows what Git is.
+
+115
+00:08:31,900 --> 00:08:33,010
+ 
+
+116
+00:08:33,010 --> 00:08:38,369
+But I'll give small presentation nevertheless. So Git is a version control system
+
+117
+00:08:38,650 --> 00:08:46,259
+and initially it was developed to manage Linux project code, if somebody doesn't know what Linux is this is one of the
+
+118
+00:08:46,840 --> 00:08:54,599
+most recognized and probably mostly used, because it's used everywhere: on the phones, on the servers, on the operating systems.
+
+119
+00:08:54,970 --> 00:09:02,010
+It's free and open source and it's developed into open and at some point they needed new version control system
+
+120
+00:09:02,010 --> 00:09:07,739
+Which would scale for the demand of having lots of code managed there and many people working with it
+
+121
+00:09:07,980 --> 00:09:13,360
+So it's not a geeky project just for... Between a few people.
+
+122
+00:09:13,900 --> 00:09:16,000
+It is developed by hundreds.
+
+123
+00:09:16,000 --> 00:09:17,240
+It's used by millions.
+
+124
+00:09:18,540 --> 00:09:21,560
+What's great about Git is that it's distributed.
+
+125
+00:09:21,780 --> 00:09:27,440
+So content is available across all copies of the repository if you clone the repository
+
+126
+00:09:28,000 --> 00:09:30,960
+You have the entire history of the project
+
+127
+00:09:30,960 --> 00:09:35,840
+and you could get to any point in that development you could compare different versions.
+
+128
+00:09:35,840 --> 00:09:41,080
+You could do exactly the same things as original developers dated on this repository.
+
+129
+00:09:41,080 --> 00:09:46,900
+So it provides you as much flexibility to accomplish things locally
+
+130
+00:09:47,470 --> 00:09:50,460
+without requiring any network access.
+
+131
+00:09:51,070 --> 00:09:55,679
+Git became a backbone for github and other social coding portals.
+
+132
+00:09:55,900 --> 00:10:01,860
+So github came to fill the niche that there were no convenient online resource
+
+133
+00:10:01,960 --> 00:10:05,960
+where people could easily share these repositories and work on them together.
+
+134
+00:10:06,480 --> 00:10:12,820
+So git is just a tool and github is just a web portal which provides you
+
+135
+00:10:13,000 --> 00:10:20,720
+a convenient centralized management of the repositories and collaboration between people.
+
+136
+00:10:20,740 --> 00:10:23,220
+But it's not a single one there are other
+
+137
+00:10:23,400 --> 00:10:25,740
+systems which use Git underneath.
+
+138
+00:10:26,400 --> 00:10:29,740
+Gitlab, Bitbucket, so...
+
+139
+00:10:31,000 --> 00:10:37,320
+It just creates this the entire ecosystem of the tool and additional services and resources.
+
+140
+00:10:38,280 --> 00:10:48,120
+What git is great for is very efficient management of textual information, right, so if you manage code, text, configuration files...
+
+141
+00:10:48,280 --> 00:10:58,700
+Maybe dumped some documentation or JSON files? So, all of those were nicely managed by git because it has really good mechanism to
+
+142
+00:10:58,940 --> 00:11:02,662
+annotate the differences and compress that efficiently.
+
+143
+00:11:02,662 --> 00:11:07,000
+So all those distributed copies are actually not that big.
+
+144
+00:11:07,200 --> 00:11:10,560
+But the problem or inefficiency of Git
+
+145
+00:11:10,820 --> 00:11:17,020
+is this exactly distributed nature of it. That it stores all the copies of the documents
+
+146
+00:11:17,320 --> 00:11:23,400
+on all the systems, right? So, if I have big files, then it becomes inefficient.
+
+147
+00:11:23,400 --> 00:11:28,300
+because now you will have two copies, right? You will have one on the hard drive (at least two copies)...
+
+148
+00:11:28,520 --> 00:11:32,049
+One on your hard drive and then one committed into Git.
+
+149
+00:11:32,050 --> 00:11:35,620
+Then if you push this into Github you will have again a
+
+150
+00:11:35,779 --> 00:11:40,029
+big copy of that file somewhere and anybody who clones that repository
+
+151
+00:11:40,580 --> 00:11:43,900
+might wait for a while to just get it and then
+
+152
+00:11:44,000 --> 00:11:51,640
+they might be a little bit upset because they wanted just one file from the repository and didn't care to download a gigabyte
+
+153
+00:11:52,120 --> 00:11:54,180
+of data just to see it.
+
+154
+00:11:54,180 --> 00:11:56,640
+So it's inefficient for storing data.
+
+155
+00:11:57,760 --> 00:12:04,980
+What is the other tool we rely on, as I said, written by Joey Hess it's Git-annex.
+
+156
+00:12:05,240 --> 00:12:11,080
+So the idea was to build on top of git to provide management for the data files
+
+157
+00:12:11,720 --> 00:12:15,279
+Without committing those files directly into Git.
+
+158
+00:12:16,520 --> 00:12:22,449
+So git-annex allows you to add data files under Git control without
+
+159
+00:12:23,120 --> 00:12:26,770
+committing the content of the files into Git.
+
+160
+00:12:27,589 --> 00:12:33,748
+While playing with Git-annex and DataLad you might see that files get replaced with the same link.
+
+161
+00:12:33,748 --> 00:12:38,280
+So what git-annex commits into Git is actually just symlink
+
+162
+00:12:38,280 --> 00:12:41,780
+which points to the file which contains the data.
+
+163
+00:12:42,170 --> 00:12:48,130
+This way you can commit really lightweight symlink and keep the data on the hard drive and a single
+
+164
+00:12:48,500 --> 00:12:55,299
+copy. Sorry, it's not in Git. And then what git-annex does, it orchestrate the
+
+165
+00:12:56,089 --> 00:12:58,089
+management of those files between
+
+166
+00:12:58,279 --> 00:13:03,519
+Different clones of the repository or so called other way special nodes.
+
+167
+00:13:03,800 --> 00:13:10,630
+But also it provides access to those files if they are let's say uploaded on to some website,
+
+168
+00:13:10,630 --> 00:13:15,760
+so you have a URL. You could associate the URL with the file, you could upload it to FTP,
+
+169
+00:13:16,100 --> 00:13:18,820
+you could upload it to web server.
+
+170
+00:13:19,550 --> 00:13:25,839
+You could even get content through BitTorrent, or you could use Amazon s3 storage as your
+
+171
+00:13:26,510 --> 00:13:31,029
+container for the files and it allows for custom extensions.
+
+172
+00:13:31,370 --> 00:13:37,389
+Let's say you could upload data to Dropbox, Google Drive, box.com and many, many other
+
+173
+00:13:38,839 --> 00:13:40,958
+data hosting provider.
+
+174
+00:13:42,079 --> 00:13:46,929
+Git-annex takes care also about avoiding the limitations of those platforms.
+
+175
+00:13:47,480 --> 00:13:54,279
+Let's say box.com from public account, it doesn't allow you to have files larger than I believe hundred megabytes.
+
+176
+00:13:54,889 --> 00:14:00,489
+Git-annex will chop it up so on the box.com you'll have little pieces
+
+177
+00:14:00,490 --> 00:14:03,820
+You will not use them directly from box.com, but then git-annex
+
+178
+00:14:03,820 --> 00:14:09,129
+will re-assemble the big file when it gets it onto your hard drive so all those
+
+179
+00:14:09,410 --> 00:14:15,339
+Conveniences and in addition encryption, that's if you want to share some sensitive data, and you cannot just upload it
+
+180
+00:14:16,130 --> 00:14:20,079
+Unencrypted to the public service all those are provided by git-annex.
+
+181
+00:14:20,839 --> 00:14:27,789
+Also additional feature which we don't use in a project is git-annex assistant which is Dropbox like
+
+182
+00:14:28,850 --> 00:14:30,850
+Synchronization mechanism you could establish
+
+183
+00:14:31,519 --> 00:14:35,649
+synchronization between your Git, git-annex repositories across multiple servers and
+
+184
+00:14:35,990 --> 00:14:42,909
+configure them really flexibly so you have that's a backup of on off all the data files on one server and
+
+185
+00:14:42,980 --> 00:14:47,589
+Some other server will have only files which it cares about let's say
+
+186
+00:14:47,930 --> 00:14:52,299
+Data files another one might have only video files
+
+187
+00:14:53,149 --> 00:14:57,698
+another one may be just music files who knows so flexibility is there and
+
+188
+00:14:58,060 --> 00:15:02,400
+It's all up to you to configure what you want where.
+
+189
+00:15:02,400 --> 00:15:07,480
+In our project we don't use it yet, but we do use it locally for synchronizing
+
+190
+00:15:07,700 --> 00:15:10,020
+different git-annex repositories.
+
+191
+00:15:12,380 --> 00:15:15,300
+But another problem here, so we have really
+
+192
+00:15:20,540 --> 00:15:21,180
+great two tools Git and git-annex, but both of them work on a single repository level.
+
+193
+00:15:21,340 --> 00:15:26,560
+So, the work in a git repository you need to go into that directory and
+
+194
+00:15:27,320 --> 00:15:29,500
+Accomplish whatever you want to do.
+
+195
+00:15:29,500 --> 00:15:33,400
+It kind of doesn't go along well with the notion of distribution
+
+196
+00:15:33,840 --> 00:15:38,760
+You don't care where you are you just want to, on your  hard drive, so you just want to say:
+
+197
+00:15:39,100 --> 00:15:42,720
+Oh, search, find me something, install this and
+
+198
+00:15:43,140 --> 00:15:46,940
+give me access to this data. Right? Or get me give me this file
+
+199
+00:15:47,080 --> 00:15:50,700
+Even though maybe I'm not in that git or git-annex repository
+
+200
+00:15:52,180 --> 00:15:56,780
+Also another kind of aspect those are just tools  so similarly like
+
+201
+00:15:57,120 --> 00:16:02,820
+how GitHub provided convenient portal to the tool git.
+
+202
+00:16:03,760 --> 00:16:07,178
+We want to accomplish something where we use these tools
+
+203
+00:16:07,178 --> 00:16:09,620
+which are agnostic of domain of the data
+
+204
+00:16:09,630 --> 00:16:11,290
+(let's say neuroimaging)
+
+205
+00:16:11,290 --> 00:16:16,410
+to give you guys access to those terabytes of publicly shared data already
+
+206
+00:16:16,720 --> 00:16:19,920
+which lives out there somewhere,
+
+207
+00:16:19,920 --> 00:16:21,569
+so we don't need to collect it. We don't need to
+
+208
+00:16:22,270 --> 00:16:26,309
+make copy of it locally, right, it's already there, so
+
+209
+00:16:26,950 --> 00:16:31,890
+What we want to achieve is just to provide access to that data without
+
+210
+00:16:32,230 --> 00:16:36,180
+Mirroring it on our servers or without duplicating it elsewhere
+
+211
+00:16:38,260 --> 00:16:47,740
+Before going into demos I want to give you kind of more illustrative demo of what is data lifecycle here of data
+
+212
+00:16:47,940 --> 00:16:51,140
+which we provide by DataLad.
+
+213
+00:16:51,340 --> 00:16:59,180
+Let's imagine that we have a data set which comes initially from OpenfMRI, right, and live somewhere in the cloud or
+
+214
+00:16:59,410 --> 00:17:07,139
+On data hosting portal actually we have two copies of the data one of them might be in the tarball, somewhere on HTTP server
+
+215
+00:17:07,420 --> 00:17:09,420
+right and another one might be
+
+216
+00:17:09,850 --> 00:17:16,860
+Extracted from the tarball, somewhere on a cloud which might have HTTP access might have S3 access,
+
+217
+00:17:16,860 --> 00:17:18,900
+but the point is that data is there and
+
+218
+00:17:19,480 --> 00:17:25,980
+Then we have a data user and that's us right me you everybody who wants to use this data
+
+219
+00:17:26,160 --> 00:17:28,160
+So now options are: we either...
+
+220
+00:17:28,390 --> 00:17:34,680
+Go down on the tarball extract it or we learn how to use S3 and go and install some tool
+
+221
+00:17:35,440 --> 00:17:37,589
+Browse S3 bucket, download those files.
+
+222
+00:17:38,950 --> 00:17:42,510
+But what we are trying to establish here is actually a middle layer, right?
+
+223
+00:17:42,710 --> 00:17:48,499
+We want to provide data distribution which might be hosted somewhere, maybe it's on github maybe in our server
+
+224
+00:17:49,050 --> 00:17:55,310
+Where I'll take this data available online and will automatically crawl it so here
+
+225
+00:17:55,310 --> 00:18:02,600
+I mentioned this command crawl which is one of the commands DataLad provides to automate monitoring of external resources
+
+226
+00:18:03,750 --> 00:18:09,230
+So we could get them into Git repositories and actually you could see here that these
+
+227
+00:18:11,040 --> 00:18:12,750
+Greenish-yellow
+
+228
+00:18:12,750 --> 00:18:15,440
+Why you don't draw here? Greenish yellow...
+
+229
+00:18:16,260 --> 00:18:17,550
+color.
+
+230
+00:18:17,550 --> 00:18:19,550
+Why you don't draw here?
+
+231
+00:18:20,580 --> 00:18:27,919
+Here we go! So, this greenish yellow color represents just a Content reference
+
+232
+00:18:28,620 --> 00:18:34,280
+Instead of the actual content, that's why we could host it on github or anywhere because it doesn't have the actual data
+
+233
+00:18:35,250 --> 00:18:40,310
+So we collect those data sets into collections, which we might share
+
+234
+00:18:40,310 --> 00:18:44,929
+let's save the one which we share from data sets that are on DataLad.org
+
+235
+00:18:45,330 --> 00:18:51,080
+underneath we use git modules which is built-in mechanism within Git to organize these collections of
+
+236
+00:18:51,270 --> 00:18:55,340
+multiple repositories while keeping track of burgeoning information
+
+237
+00:18:55,340 --> 00:18:58,369
+So you could get the entire collection of let's say of OpenfMRI data sets
+
+238
+00:18:58,560 --> 00:19:02,749
+For a specific date for a specific version if you want to reproduce some of these else analysis
+
+239
+00:19:02,750 --> 00:19:06,140
+And then we are making it possible to install
+
+240
+00:19:06,660 --> 00:19:10,009
+Arbitrary number of those data sets we are unified interface
+
+241
+00:19:10,710 --> 00:19:16,639
+So here we mentioned command datalad --install which you will see later and hopefully
+
+242
+00:19:17,400 --> 00:19:22,400
+Those parameters like install into current data set and get all the data
+
+243
+00:19:23,010 --> 00:19:28,550
+Will it be less surprising and also we provide shortcuts so which I'll talk about later
+
+244
+00:19:28,800 --> 00:19:31,100
+But the point is that you could now easily
+
+245
+00:19:31,680 --> 00:19:36,680
+Install those data sets onto your local hard drive, and if you are doing some processing
+
+246
+00:19:37,530 --> 00:19:44,810
+It might add results of the process in this case. We've got new file filtered bold file, which we could easily add
+
+247
+00:19:45,660 --> 00:19:50,480
+Into this repository and which means which is committed into the repository
+
+248
+00:19:51,000 --> 00:19:58,739
+Under git-annex control. And later we could publish this entirety of maybe collection of the datasets
+
+249
+00:20:00,010 --> 00:20:05,010
+to multiple places one of them might be github or we publish only the
+
+250
+00:20:06,130 --> 00:20:08,729
+repository itself without actually data files again
+
+251
+00:20:08,730 --> 00:20:16,170
+Those are just symlinks and maybe offload the actual data to some server which my HTTP server
+
+252
+00:20:18,100 --> 00:20:25,230
+or some other server through some mechanism right, but the point is that data goes somewhere and the magic happens here
+
+253
+00:20:25,330 --> 00:20:31,709
+Thanks to the git-annex because that's the Beast which keeps track of were each data file
+
+254
+00:20:32,080 --> 00:20:36,929
+Could be obtained from so this red links point to the information
+
+255
+00:20:36,930 --> 00:20:44,339
+What git-annex stores for us that I let's say this bald file is available from original web portal right it's available from S3 bucket,
+
+256
+00:20:44,340 --> 00:20:48,300
+it might be coming from a tarball, so that's one of the extensions
+
+257
+00:20:48,300 --> 00:20:53,190
+we added to git-annex to support extraction of the files from the tarball.
+
+258
+00:20:53,740 --> 00:20:57,330
+So it becomes really transparent to the user and this new file
+
+259
+00:20:58,570 --> 00:21:04,889
+We published it there. So it might be available now through HTTP so people who cloned this repository
+
+260
+00:21:06,220 --> 00:21:13,620
+Would be able to get any file from original storage or from any derived data
+
+261
+00:21:13,720 --> 00:21:15,720
+Which we published on our website?
+
+262
+00:21:16,840 --> 00:21:20,250
+So that's kind of the main idea behind DataLad.
+
+263
+00:21:21,610 --> 00:21:23,260
+So, altogether
+
+264
+00:21:23,260 --> 00:21:28,650
+DataLad allows you to manage multiple repositories organized into these super datasets
+
+265
+00:21:28,650 --> 00:21:34,680
+Which are just collection of git repositories using standard git sub-modules mechanism.
+
+266
+00:21:34,990 --> 00:21:38,760
+It supports both git and ggit-annex repository, so if you have
+
+267
+00:21:39,490 --> 00:21:45,180
+Just regular git repositories where you don't want to add any data. It's perfectly fine.
+
+268
+00:21:45,940 --> 00:21:52,499
+We can crawl external online data resources and update git-annex repositories upon changes.
+
+269
+00:21:53,770 --> 00:21:59,160
+It seems to scale quite nicely because data stays with original data provider
+
+270
+00:21:59,160 --> 00:22:02,369
+so we don't need to increase the storage in our server and
+
+271
+00:22:02,920 --> 00:22:09,020
+We could use maybe or you could use because anybody could use DataLad to publish
+
+272
+00:22:09,200 --> 00:22:11,300
+their collections of the datasets on
+
+273
+00:22:12,760 --> 00:22:19,679
+github and maybe offloading data itself to portals like box.com or dropbox.
+
+274
+00:22:21,279 --> 00:22:25,769
+What happens now that we have unified access to data regardless of its origin
+
+275
+00:22:25,770 --> 00:22:30,389
+I didn't care if data comes from openfMRI or CRCNS.
+
+276
+00:22:30,820 --> 00:22:36,960
+The only difference might be that you need to authenticate it. Let's say CRCNS doesn't allow download without authentication.
+
+277
+00:22:37,539 --> 00:22:42,929
+So DataLad will ask you for credentials, which you should store locally in the hard drive
+
+278
+00:22:42,960 --> 00:22:46,649
+Nothing is shared with us and later on when you need to get more data
+
+279
+00:22:46,750 --> 00:22:51,089
+Just to use those credentials to authenticate in your behalf to CRCNS,
+
+280
+00:22:51,640 --> 00:22:55,559
+download those tarballs extract it for you, so you didn't need to worry about that and
+
+281
+00:22:56,260 --> 00:23:00,929
+Also, we take care about serialization, so if original website distributes only tarballs
+
+282
+00:23:01,779 --> 00:23:04,919
+We download tarballs for you, extract them and again
+
+283
+00:23:04,919 --> 00:23:08,939
+You didn't need to worry how the data is actually serialized by original data provider
+
+284
+00:23:09,940 --> 00:23:13,770
+What we do on top is that we aggregate metadata.
+
+285
+00:23:14,320 --> 00:23:18,390
+What metadata is? It is data about the data.
+
+286
+00:23:18,880 --> 00:23:24,779
+So let's say you have a data set which contains the data the results information about what this data
+
+287
+00:23:24,779 --> 00:23:28,409
+Set is about what it's named. What was its offer authors?
+
+288
+00:23:29,080 --> 00:23:31,640
+What might be the license if it's applicable?
+
+289
+00:23:32,160 --> 00:23:35,880
+so any additional information about the data constitutes metadata.
+
+290
+00:23:36,140 --> 00:23:42,080
+What we do in DataLad, we aggregate metadata, which we find about the original data sets and
+
+291
+00:23:42,820 --> 00:23:44,490
+Provide you convenient interface
+
+292
+00:23:44,490 --> 00:23:48,329
+So you could search across all of it across all the data sets which we already
+
+293
+00:23:48,640 --> 00:23:52,049
+Integrated in DataLad. And I hope you'll see the demonstration
+
+294
+00:23:52,750 --> 00:23:54,959
+quite appealing later on.
+
+295
+00:23:56,049 --> 00:24:01,679
+Then DataLad after you consumed added extended data sets or just created from scratch
+
+296
+00:24:02,380 --> 00:24:09,839
+You could share original or derived datasets publicly as I mentioned or internally you could always
+
+297
+00:24:10,659 --> 00:24:16,709
+publish them locally at your SSH may be to collaborate with somebody and that's what we do regularly and
+
+298
+00:24:17,919 --> 00:24:19,919
+Meanwhile we'll keep data
+
+299
+00:24:20,320 --> 00:24:27,780
+we could keep data available elsewhere, or you could even share the data set without sharing the data, which is quite keen as
+
+300
+00:24:29,860 --> 00:24:36,360
+Demonstration of good intent when you are about to publish the paper, that's what we did them with our recent submission
+
+301
+00:24:36,360 --> 00:24:40,829
+We publish the data set but not with the entirety of the data set
+
+302
+00:24:40,830 --> 00:24:45,449
+But just with first subject so reviewers could verify that there is
+
+303
+00:24:46,450 --> 00:24:48,130
+Good quality data
+
+304
+00:24:48,130 --> 00:24:49,990
+that
+
+305
+00:24:49,990 --> 00:24:56,099
+They could get access to it right and that the entirety of data is in principle available
+
+306
+00:24:56,100 --> 00:25:00,089
+And it was processed accordingly because the whole the entire Git history
+
+307
+00:25:00,850 --> 00:25:04,650
+is maintained and shared, but the data files are not
+
+308
+00:25:06,160 --> 00:25:10,560
+Okay and the additional benefit some of it, which is work in progress
+
+309
+00:25:11,080 --> 00:25:15,449
+You could export the data set if you want to share just the data itself you could
+
+310
+00:25:15,580 --> 00:25:21,420
+Export the data set and current version in a tarball and give it to somebody but more exciting feature
+
+311
+00:25:21,700 --> 00:25:25,680
+and we've been working on is exporting in to
+
+312
+00:25:26,290 --> 00:25:27,370
+some
+
+313
+00:25:27,370 --> 00:25:31,170
+Metadata heavy data formats if you're publishing scientific data
+
+314
+00:25:31,660 --> 00:25:37,170
+You will be asked to fill out a big spreadsheet, which is called easy to have
+
+315
+00:25:38,950 --> 00:25:44,340
+To annotate metadata for your data set it's really tedious and unpleasant job
+
+316
+00:25:44,340 --> 00:25:48,630
+But the beauty is that all that information is contained within
+
+317
+00:25:49,030 --> 00:25:54,180
+metadata of either data set or of git-annex. So we could automatically
+
+318
+00:25:54,580 --> 00:26:01,199
+export majority of information for you, so you just need to fill out left out information and be done
+
+319
+00:26:04,150 --> 00:26:07,680
+DataLad comes with both common line and Python interfaces
+
+320
+00:26:07,680 --> 00:26:14,489
+So you could work with it interactively either in common line or script it in bash or working with it interactively in the ipython
+
+321
+00:26:14,830 --> 00:26:20,100
+and script it with Python language it gives you the same capabilities and really similar syntax
+
+322
+00:26:22,300 --> 00:26:24,100
+Our distribution
+
+323
+00:26:24,100 --> 00:26:27,089
+Grew up already to cover over ten terabytes of data
+
+324
+00:26:27,910 --> 00:26:31,469
+We cover such data sets as OpenfMRI, CRCNS,
+
+325
+00:26:32,560 --> 00:26:34,560
+functional connectome
+
+326
+00:26:34,870 --> 00:26:42,430
+INDI data sets and even some data sets from Kaggle and some RatHole radio podcast show
+
+327
+00:26:42,830 --> 00:26:49,059
+Because it was a cool experiment to be able to crawl that website and collect all the data
+
+328
+00:26:49,520 --> 00:26:52,599
+About timing of the songs. So check it out
+
+329
+00:26:52,600 --> 00:26:57,100
+It's available on github although data stays as again with original provider
+
+330
+00:26:57,370 --> 00:27:03,609
+What is coming? More data, so we'll cover human connectome project and data available from x net servers
+
+331
+00:27:03,890 --> 00:27:08,410
+We want to provide extended metadata support, so we cover not only data sets
+
+332
+00:27:08,410 --> 00:27:09,190
+level data
+
+333
+00:27:09,190 --> 00:27:16,750
+But also data for separate files if you know about any other interesting data set or data provider
+
+334
+00:27:17,390 --> 00:27:20,739
+File a new issue, or shoot us an email.
+
+335
+00:27:21,590 --> 00:27:27,850
+we are also working on integrating with NeuroDebian, so you could apt-get install those datasets and the position of data to
+
+336
+00:27:28,580 --> 00:27:32,350
+OSF and in other platforms. Another interesting integration
+
+337
+00:27:32,350 --> 00:27:39,880
+Which we've done was to introduce DataLad support into HeuDiConv which stands for Heuristic DICOM Conversion Tool.
+
+338
+00:27:39,880 --> 00:27:41,809
+which allows you to
+
+339
+00:27:41,809 --> 00:27:47,739
+automate conversion of your DICOM data obtained from MRI scanner into NIfTI files
+
+340
+00:27:48,080 --> 00:27:51,520
+but we went one step further and
+
+341
+00:27:52,280 --> 00:27:57,489
+Standardized it to convert not only to DataLad data set but DataLad BIDS data sets.
+
+342
+00:27:57,490 --> 00:28:02,020
+Set so if you don't know what BIDS is, it is something you must know nowadays.
+
+343
+00:28:02,540 --> 00:28:07,479
+If you doing imaging research. It's brain imaging data structure format
+
+344
+00:28:07,700 --> 00:28:14,679
+Which describes how you should lay out your files on a file system so anybody who finds your data set will be immediately
+
+345
+00:28:15,230 --> 00:28:17,230
+capable to understand
+
+346
+00:28:17,690 --> 00:28:24,970
+your design how many subjects you have so it's standardized is beyond NIfTI. It standardized is how you
+
+347
+00:28:25,280 --> 00:28:27,280
+Work with your files so now
+
+348
+00:28:27,680 --> 00:28:33,500
+With this integration HeuDiConv we can obtain DataLad datasets
+
+349
+00:28:34,360 --> 00:28:39,660
+with BIDS if I'd neuroimaging data, so it's ready to be shared
+
+350
+00:28:39,670 --> 00:28:44,109
+It's ready to be processed by any BIDS compatible tool, so it opens ample
+
+351
+00:28:44,660 --> 00:28:46,660
+opportunities
+
+352
+00:28:46,790 --> 00:28:50,930
+And at this point I guess we should switch and do some demos
+
+353
+00:28:53,640 --> 00:28:59,989
+And before I actually give any demo I want to familiarize you with our new website DataLad.org
+
+354
+00:29:01,110 --> 00:29:03,000
+On top you could see
+
+355
+00:29:03,000 --> 00:29:06,619
+navigation for among major portions the website
+
+356
+00:29:07,140 --> 00:29:09,170
+One of them is about page
+
+357
+00:29:09,870 --> 00:29:13,910
+Just describes the purpose of the DataLad and provides
+
+358
+00:29:14,580 --> 00:29:18,379
+information about funding agencies and involved institutions
+
+359
+00:29:20,010 --> 00:29:22,010
+Next link is "Get DataLad"
+
+360
+00:29:22,890 --> 00:29:30,350
+Which describes how to install the DataLad. The easiest installation is if you are using your Debian already.
+
+361
+00:29:30,600 --> 00:29:38,280
+Then it just apt-get install DataLad command or you could find it in package manager and install it within second
+
+362
+00:29:38,720 --> 00:29:45,320
+Alternatively, if you are on OS-X or any other operating system. Windows support is initial but it
+
+363
+00:29:46,230 --> 00:29:49,190
+Should work in the basic set of features
+
+364
+00:29:49,800 --> 00:29:51,950
+you have to install git-annex by
+
+365
+00:29:52,500 --> 00:29:54,590
+going to git-annex website and
+
+366
+00:29:56,850 --> 00:29:58,850
+Into install page
+
+367
+00:29:59,280 --> 00:30:05,840
+choosing the operating system of your choice and following the instructions there how to get it and
+
+368
+00:30:07,200 --> 00:30:09,140
+after you installed git-annex
+
+369
+00:30:09,140 --> 00:30:15,499
+You just need to install DataLad from Python package index through pip-install datalad command.
+
+370
+00:30:16,920 --> 00:30:19,399
+Next page is features page
+
+371
+00:30:19,410 --> 00:30:27,379
+Which is actually led to by those pretty boxes on the main page and this page will go through
+
+372
+00:30:27,840 --> 00:30:29,840
+later in greater detail
+
+373
+00:30:30,150 --> 00:30:33,379
+Another interesting page is Datasets which presents you our
+
+374
+00:30:34,110 --> 00:30:39,200
+ultimate official distribution which points to datasets.datalad.org
+
+375
+00:30:39,990 --> 00:30:44,479
+which is the collection of data sets which already pre crawled for you and
+
+376
+00:30:45,240 --> 00:30:50,420
+That were we provide those data sets like for Open fRI
+
+377
+00:30:51,510 --> 00:30:53,340
+CRCNS
+
+378
+00:30:53,340 --> 00:30:55,290
+ADHD and
+
+379
+00:30:55,290 --> 00:30:56,940
+many others
+
+380
+00:30:56,940 --> 00:31:00,469
+I will just briefly describe the features of these
+
+381
+00:31:00,990 --> 00:31:07,819
+Basic website and mention that the such websites if you have any HTTP server available somewhere
+
+382
+00:31:08,130 --> 00:31:13,459
+Maybe institution provides because you will not host the data actually here, or you don't have to
+
+383
+00:31:14,429 --> 00:31:21,349
+you could upload similar views of your data sets pretty much anywhere where you could host a website and
+
+384
+00:31:22,140 --> 00:31:26,479
+OpenfMRI, let's say we go to OpenfMRI, it lists all those data sets
+
+385
+00:31:26,480 --> 00:31:31,459
+which we crawled from OpenfMRI, you could see also immediately mentioning of the version
+
+386
+00:31:31,980 --> 00:31:33,980
+here and version goes
+
+387
+00:31:33,990 --> 00:31:35,990
+from
+
+388
+00:31:36,000 --> 00:31:42,949
+What version OpenfMRI gave it but also with additional indices pointing to exact commits
+
+389
+00:31:44,490 --> 00:31:50,539
+Within our git repository I didn't find that version another neat feature here is
+
+390
+00:31:51,389 --> 00:31:52,919
+immediate
+
+391
+00:31:52,919 --> 00:31:57,469
+Search so you could start typing and now if you're interested in resting-state
+
+392
+00:31:58,320 --> 00:32:00,320
+So here we go it goes
+
+393
+00:32:01,529 --> 00:32:06,199
+Pretty fast and limits the view only the data sets where metadata
+
+394
+00:32:07,350 --> 00:32:12,169
+Mentions this word and say let's look for Haxby... There we go!
+
+395
+00:32:12,779 --> 00:32:18,619
+Or let's look for "movie". There we go! So, you could quickly identify the data sets by
+
+396
+00:32:19,350 --> 00:32:21,829
+browsing and we'll see how we could do
+
+397
+00:32:22,289 --> 00:32:25,039
+such actions later in the command line and
+
+398
+00:32:25,289 --> 00:32:31,638
+When you get to the data set of interest or it could be at any pretty much level you'll see on top the command which
+
+399
+00:32:31,639 --> 00:32:35,509
+Could be used to install this data set and described in some options
+
+400
+00:32:35,510 --> 00:32:40,969
+Let's say -r is to install this data set with any possible sub data set recursively.
+
+401
+00:32:41,309 --> 00:32:46,699
+There's -g to install it and also obtain all the data for it, and if you want to speed up the
+
+402
+00:32:48,360 --> 00:32:51,110
+obtaining the data you could use -J
+
+403
+00:32:51,110 --> 00:32:56,899
+And specify the number of parallel downloads your server and bandwidth could allow you
+
+404
+00:32:57,929 --> 00:33:01,788
+Okay, let's go back to DataLad website and another
+
+405
+00:33:03,779 --> 00:33:10,489
+Page on the website is development. So, if you're interested to help and contribute datasets provide
+
+406
+00:33:11,039 --> 00:33:13,039
+patches improve documentation
+
+407
+00:33:13,320 --> 00:33:20,140
+All of the development this is made in open. We use github intensively, we use Travis, we use codecov.
+
+408
+00:33:20,920 --> 00:33:27,200
+We use Grid for documentation so and that will be our next point
+
+409
+00:33:28,509 --> 00:33:33,479
+Documentation is hosted on docs.datalad.org and it provides
+
+410
+00:33:34,720 --> 00:33:39,480
+Not yet as thorough documentation as we wanted but some
+
+411
+00:33:39,789 --> 00:33:46,289
+documentation about major features of the dataset or a comparison between Git, git-annex and DataLad.
+
+412
+00:33:46,659 --> 00:33:48,659
+But it also provides
+
+413
+00:33:49,179 --> 00:33:56,429
+Really thorough interface documentation so as I mentioned before we have command line and Python
+
+414
+00:33:57,519 --> 00:34:01,199
+interfaces both of those interfaces generated from the same code
+
+415
+00:34:01,200 --> 00:34:03,539
+So they should be pretty much identical
+
+416
+00:34:03,759 --> 00:34:07,829
+It just depending how you use command line or Python it will be different
+
+417
+00:34:07,839 --> 00:34:11,129
+But otherwise all the options all the commands
+
+418
+00:34:11,169 --> 00:34:15,449
+They look exactly the same and in command line reference
+
+419
+00:34:15,450 --> 00:34:23,069
+You could find all the documentation for all the commands you could use it that I have some popular ones in my case
+
+420
+00:34:23,069 --> 00:34:29,099
+Right where I went before and it provides documentation what those and of course there is
+
+421
+00:34:30,129 --> 00:34:33,629
+notes for power users and quite elaborate
+
+422
+00:34:34,179 --> 00:34:37,648
+documentation here about all the options which are available
+
+423
+00:34:38,230 --> 00:34:40,230
+in those commands
+
+424
+00:34:41,139 --> 00:34:45,779
+Ok so let's go back to features and
+
+425
+00:34:47,710 --> 00:34:52,859
+First of the demos which I want to show you will be about data discovery
+
+426
+00:34:54,399 --> 00:34:59,608
+That's any other demo on the website and is provided with
+
+427
+00:35:00,880 --> 00:35:03,420
+screencast which shows all
+
+428
+00:35:04,720 --> 00:35:07,770
+necessary commands to carry out the
+
+429
+00:35:09,670 --> 00:35:12,119
+Presentation, but also provides you with
+
+430
+00:35:13,210 --> 00:35:17,399
+comments describing the purpose of the actions taken
+
+431
+00:35:18,520 --> 00:35:20,079
+moreover
+
+432
+00:35:20,079 --> 00:35:25,989
+You could obtain the full script for the demo so you could run it as case on your hardware
+
+433
+00:35:28,040 --> 00:35:32,379
+By clicking underneath the screen screencast but
+
+434
+00:35:33,800 --> 00:35:38,769
+For this demonstration. I'll do it interactively in a shell together with you
+
+435
+00:35:40,280 --> 00:35:41,960
+So
+
+436
+00:35:41,960 --> 00:35:43,960
+Let's get started!
+
+437
+00:35:44,510 --> 00:35:46,540
+If as you remember
+
+438
+00:35:47,270 --> 00:35:53,590
+We aggregate a lot of metadata in DataLad to provide efficient search mechanisms
+
+439
+00:35:55,520 --> 00:35:59,919
+In this example we'll imagine that we were looking for a data set which mentions
+
+440
+00:36:00,650 --> 00:36:07,600
+Raiders in his word after being associated with movie Raiders of the Lost Ark and during imaging
+
+441
+00:36:09,230 --> 00:36:12,399
+So we'll use datalad -search command where we'll
+
+442
+00:36:13,430 --> 00:36:16,300
+Just state it right, so we'll call datalad -search
+
+443
+00:36:16,300 --> 00:36:22,449
+Raiders neuroimaging as with a mini or all commands in DataLad
+
+444
+00:36:23,060 --> 00:36:26,110
+They are composed by calling datalad
+
+445
+00:36:26,110 --> 00:36:33,819
+then typing the command you want to implement right and then you could ask for help for that command
+
+446
+00:36:36,440 --> 00:36:37,850
+Which
+
+447
+00:36:37,850 --> 00:36:39,850
+provides you with
+
+448
+00:36:39,950 --> 00:36:41,950
+associated help and
+
+449
+00:36:42,170 --> 00:36:47,740
+On my screen took a little bit longer just because of video recording usually it's a little bit faster like
+
+450
+00:36:48,380 --> 00:36:50,359
+five times and
+
+451
+00:36:50,359 --> 00:36:54,369
+Then you actually type the parameters for this command. For search
+
+452
+00:36:54,369 --> 00:36:58,869
+It's actually search terms, and I'll present a few other options later on
+
+453
+00:36:59,780 --> 00:37:01,780
+whenever you
+
+454
+00:37:02,270 --> 00:37:09,759
+Start this command for the first time it will ask you to install our super data set
+
+455
+00:37:11,210 --> 00:37:17,590
+Under your home DataLad, in my case that slash demo is the home directory so it asks either
+
+456
+00:37:17,590 --> 00:37:21,609
+We want to install that super dates which you saw available on DataLad.org
+
+457
+00:37:22,310 --> 00:37:24,459
+in your home directory.
+
+458
+00:37:24,460 --> 00:37:32,139
+And that's what it's doing so it quickly installed it because it's just a small git repository without any of those data sets
+
+459
+00:37:32,720 --> 00:37:38,970
+Directly in a part of it, but they are linked to it as sub modules. It was really fast, and then it loads and caches
+
+460
+00:37:39,610 --> 00:37:44,069
+metadata, which became available in that dataset and that takes few seconds
+
+461
+00:37:51,010 --> 00:37:58,649
+Whenever that is done it you see that by default it just returns the paths or names of the
+
+462
+00:38:00,190 --> 00:38:05,369
+Datasets as they are within the hierarchy of our super dataset and
+
+463
+00:38:07,510 --> 00:38:09,510
+Search searches within the
+
+464
+00:38:10,030 --> 00:38:13,709
+Repository data set you are in so if next time
+
+465
+00:38:13,710 --> 00:38:20,159
+I am just running the same command it will ask me instead of: "Oh, do you want to install it?" it'll ask me either
+
+466
+00:38:20,160 --> 00:38:23,879
+I want to search in this super dataset which I installed in my home directory
+
+467
+00:38:26,530 --> 00:38:28,530
+Type yes
+
+468
+00:38:32,710 --> 00:38:37,619
+And it provides the same result so to avoid such interactive questions
+
+469
+00:38:37,620 --> 00:38:42,780
+you could explicitly mention which data set you want to search in.
+
+470
+00:38:43,060 --> 00:38:45,840
+In our case it will be, I'll just specify
+
+471
+00:38:46,570 --> 00:38:49,170
+That data set will be this
+
+472
+00:38:49,930 --> 00:38:51,400
+canonical
+
+473
+00:38:51,400 --> 00:38:54,270
+DataLad data set which is installed in your
+
+474
+00:38:55,210 --> 00:38:57,750
+DataLad directory when you specify it like this
+
+475
+00:38:57,750 --> 00:39:06,160
+It assumes location in your home directory when you use triple slashes resource identifier as the source for URLs
+
+476
+00:39:06,360 --> 00:39:14,020
+To install data sets then it will go to the datasets.datalad.org. And this time we'll search not for Raiders
+
+477
+00:39:14,040 --> 00:39:20,190
+neuroimaging, but we'll search for Haxby, one of the authors within this data set
+
+478
+00:39:20,950 --> 00:39:27,839
+So -s stands for the fields which we want to search through and -R will report now
+
+479
+00:39:27,840 --> 00:39:30,299
+Not just the path to the data set but also
+
+480
+00:39:30,940 --> 00:39:32,940
+list the fields which match the
+
+481
+00:39:33,610 --> 00:39:39,120
+Query which we ran. So in this case it should search for data sets and report the field "author".
+
+482
+00:39:40,210 --> 00:39:43,919
+And only the data sets where Haxby was one of the authors.
+
+483
+00:39:44,620 --> 00:39:46,390
+So here they are
+
+484
+00:39:46,390 --> 00:39:49,410
+For convenience, let's just switch to that directory
+
+485
+00:39:50,160 --> 00:39:52,160
+under our home
+
+486
+00:39:52,329 --> 00:39:56,939
+Let me clear the screen and go to that directory
+
+487
+00:39:58,000 --> 00:40:00,299
+So now we don't have to specify
+
+488
+00:40:01,539 --> 00:40:03,660
+Location of the data set explicitly,
+
+489
+00:40:03,660 --> 00:40:07,360
+and we could just type the same query without -d
+
+490
+00:40:07,360 --> 00:40:08,669
+and it will provide the same results
+
+491
+00:40:13,420 --> 00:40:15,160
+Instead of listing all matching fields,
+
+492
+00:40:15,160 --> 00:40:19,200
+let's say in our case it was "author" field, we could
+
+493
+00:40:20,019 --> 00:40:25,409
+explicitly specify which fields you want to search through or to report.
+
+494
+00:40:26,289 --> 00:40:27,813
+So in this case, I want to see
+
+495
+00:40:27,813 --> 00:40:31,319
+what's the name of the dataset and what is the author of the dataset?
+
+496
+00:40:31,319 --> 00:40:33,989
+It's already the author, but with didn't see the name.
+
+497
+00:40:35,109 --> 00:40:39,929
+And you're on the command to get the output with those fields included
+
+498
+00:40:41,710 --> 00:40:43,630
+Well enough of searching!
+
+499
+00:40:43,630 --> 00:40:47,369
+Let's clear the screen and what we could do now -- we found
+
+500
+00:40:47,680 --> 00:40:51,539
+the datasets right it seems to be that the list of data sets which we found
+
+501
+00:40:52,360 --> 00:40:55,860
+is good to be installed and we could just
+
+502
+00:40:56,760 --> 00:40:59,350
+rely on a paradigm of Linux
+
+503
+00:40:59,350 --> 00:41:05,680
+where you compose commands together through by using pipe command.
+
+504
+00:41:05,860 --> 00:41:08,900
+So, what this magic would do?
+
+505
+00:41:08,900 --> 00:41:16,560
+If we didn't have these which already what happens -- we get only the list of data sets or past
+
+506
+00:41:16,690 --> 00:41:22,560
+Those which are not installed yet,
+
+507
+00:41:22,560 --> 00:41:24,569
+and OpenfMRI directory is still empty so we get the list of data sets
+
+508
+00:41:25,320 --> 00:41:29,060
+But then instead of manually going and doing:
+
+509
+00:41:29,060 --> 00:41:33,800
+"datalad install openfmri/ds00233"...
+
+510
+00:41:33,980 --> 00:41:39,060
+or doing copy-paste, we could just say that result of this command
+
+511
+00:41:39,400 --> 00:41:41,400
+should be passed as
+
+512
+00:41:41,400 --> 00:41:45,760
+Arguments to the next command which will be "datalad install".
+
+513
+00:41:45,760 --> 00:41:48,680
+"datalad install" command installs those datasets
+
+514
+00:41:48,680 --> 00:41:51,140
+which are either specified by the
+
+515
+00:41:51,819 --> 00:41:56,069
+path within current data set or you could provide URLs to
+
+516
+00:41:56,800 --> 00:42:02,300
+Install command and it will go to those websites and download them explicitly from there.
+
+517
+00:42:02,300 --> 00:42:05,780
+"datalad install" could be used with other resources
+
+518
+00:42:06,340 --> 00:42:10,800
+beyond our canonical DataLad distribution.
+
+519
+00:42:11,140 --> 00:42:13,140
+So let's run this command
+
+520
+00:42:14,960 --> 00:42:18,640
+as a result of it you'll see that now it goes online and
+
+521
+00:42:19,550 --> 00:42:25,630
+Installs all those data sets or git/git-annex repositories without any data yet
+
+522
+00:42:25,670 --> 00:42:29,950
+So only the files which are committed directly into git will be present.
+
+523
+00:42:42,040 --> 00:42:47,320
+And now we could explore what actually we have got here.
+
+524
+00:42:47,320 --> 00:42:52,200
+I'll use another DataLad command. Let me clear the screen to bring it on top of the screen.
+
+525
+00:42:53,079 --> 00:42:56,099
+Next command is "ls", which just lists
+
+526
+00:42:56,940 --> 00:43:01,400
+either data sets or it could be used also at list S3 URLs.
+
+527
+00:43:01,400 --> 00:43:04,380
+If you are interested to see what is available in S3 bucket.
+
+528
+00:43:04,380 --> 00:43:11,159
+And we are specifying the options: capital -L for long listing, and -r recursively
+
+529
+00:43:11,160 --> 00:43:15,780
+So it will go through all data sets locally in current directory.
+
+530
+00:43:15,780 --> 00:43:20,060
+(That's why there is a period). And then we'll just remove a list in our data sets
+
+531
+00:43:20,069 --> 00:43:23,129
+which are not installed because they are not of our interest here.
+
+532
+00:43:56,050 --> 00:44:01,889
+As you can see all those datasets, which we initially searched for and found
+
+533
+00:44:03,820 --> 00:44:05,820
+Right?
+
+534
+00:44:09,850 --> 00:44:13,860
+They became installed, so they became available on our
+
+535
+00:44:14,500 --> 00:44:19,290
+Local file system and "ls" gives us idea. What kind of repository it is
+
+536
+00:44:19,530 --> 00:44:21,870
+It's Git versus annex, which branch it is in...
+
+537
+00:44:22,320 --> 00:44:24,560
+What was the date of the last commit?
+
+538
+00:44:24,920 --> 00:44:33,360
+Also, the sizes what it tells here that we have a lot of 4 gigabytes of data referenced in this data set at the current
+
+539
+00:44:33,900 --> 00:44:39,340
+version we've got only 0 bytes locally installed.
+
+540
+00:44:39,520 --> 00:44:44,720
+We installed only those symlinks I was talking about.
+
+541
+00:44:46,150 --> 00:44:51,570
+So, now we could actually explore what have you got?
+
+542
+00:44:53,290 --> 00:44:58,709
+Some of the files that were committed directly into Git, so they became available on the file system as is
+
+543
+00:44:59,320 --> 00:45:06,029
+But data files we could obtain now using the "datalad get" command.
+
+544
+00:45:06,670 --> 00:45:09,629
+So what this command will do... Let me clear the screen again...
+
+545
+00:45:10,440 --> 00:45:16,960
+So you're saying: "Obtain those files! Do it in four parallel processes."
+
+546
+00:45:16,960 --> 00:45:24,040
+All the files which match these Shell globe expressions,
+
+547
+00:45:24,040 --> 00:45:26,480
+so all the data sets locally which we have
+
+548
+00:45:26,860 --> 00:45:32,759
+For all the subjects underneath and anatomical directory, right? We obtained all ready two OpenfMRI dataset
+
+549
+00:45:32,760 --> 00:45:35,040
+And now we just want to obtain those data files
+
+550
+00:45:35,320 --> 00:45:42,780
+Let's actually see what this one is pointing to... It points to all those data files.
+
+551
+00:45:42,940 --> 00:45:46,240
+And if only listed with long listing,
+
+552
+00:45:46,240 --> 00:45:51,480
+we'll see that those were symlinks which are actually at the moment not even present on that
+
+553
+00:45:51,820 --> 00:45:56,759
+Point into the files which we don't have locally and that's what git-annex would do for us
+
+554
+00:45:56,760 --> 00:45:59,760
+It would go online and fetch all those files
+
+555
+00:46:00,910 --> 00:46:02,910
+from wherever they are available
+
+556
+00:46:03,520 --> 00:46:05,520
+So let me run this command now
+
+557
+00:46:18,220 --> 00:46:21,629
+As you can see the are four processes going on
+
+558
+00:46:27,640 --> 00:46:29,640
+And the end.
+
+559
+00:46:30,120 --> 00:46:37,060
+All DataLad commands they provide you a summary of what actions did it take?
+
+560
+00:46:37,280 --> 00:46:42,020
+Here you could see that it got all those files ready to get okay
+
+561
+00:46:42,299 --> 00:46:49,619
+Or it might say get failed if it failed to get them and then provides action summary, which we might see later in other demos
+
+562
+00:46:50,650 --> 00:46:57,150
+So let's now run the same command which you ran before to see how much of data we actually got?
+
+563
+00:47:26,540 --> 00:47:30,199
+As you can see all those which we didn't ask for any data
+
+564
+00:47:30,200 --> 00:47:33,500
+They still keep zero bytes although all
+
+565
+00:47:33,810 --> 00:47:37,969
+the files that are available and we could browse them,
+
+566
+00:47:37,970 --> 00:47:42,830
+but those where we requested additional data files to be obtained finally list how much data
+
+567
+00:47:42,830 --> 00:47:46,159
+we have in the working tree
+
+568
+00:47:47,070 --> 00:47:50,059
+of those data sets.
+
+569
+00:47:51,120 --> 00:47:54,739
+That would complete the demo for "search" and "install".
+
+570
+00:47:56,610 --> 00:48:01,489
+Now it's your turn to find some interesting for you data sets and get the data for them
+
+571
+00:48:03,330 --> 00:48:10,009
+Now that we went through one of the demos on our website or we call it features which was data discovery
+
+572
+00:48:10,410 --> 00:48:12,860
+You could go and visit other
+
+573
+00:48:15,450 --> 00:48:19,010
+features described on this page. First one is for data consumers
+
+574
+00:48:19,010 --> 00:48:25,580
+which describes how you could generate native DataLad datasets from the website or
+
+575
+00:48:26,250 --> 00:48:29,540
+S3 buckets using our crawler so
+
+576
+00:48:30,870 --> 00:48:33,409
+If you know some resource you could create your own
+
+577
+00:48:33,870 --> 00:48:40,999
+DataLad crawler to obtain that data into DataLad dataset and keep it up to date with periodic reruns.
+
+578
+00:48:41,760 --> 00:48:43,760
+Data sharing demo will later show
+
+579
+00:48:44,970 --> 00:48:50,570
+examples of how you could share the data either on Github, through the github while depositing data to your website,
+
+580
+00:48:51,090 --> 00:48:56,840
+how I demonstrated earlier, or just for collaboration through SSH servers.
+
+581
+00:48:57,870 --> 00:48:59,600
+For Git and git-annex users
+
+582
+00:48:59,600 --> 00:49:07,579
+We give a little example of unique features present in DataLad contrasting it with
+
+583
+00:49:08,310 --> 00:49:10,881
+regular Git and git-annex usage.
+
+584
+00:49:10,881 --> 00:49:16,280
+This table outlines there those features.
+
+585
+00:49:16,280 --> 00:49:23,740
+We operate on multiple data sets at the same time, we operate across data sets seamlessly
+
+586
+00:49:23,750 --> 00:49:30,169
+So you don't have to switch directories to just operate in with specific data files they provide metadata support
+
+587
+00:49:30,860 --> 00:49:37,840
+And aggregate from different panel data sources and in unified authentication interface.
+
+588
+00:49:38,480 --> 00:49:40,480
+Also, one of the
+
+589
+00:49:40,700 --> 00:49:48,159
+new unique features in DataLad is ability to rerun previously ran commands on the data to see how
+
+590
+00:49:49,820 --> 00:49:52,299
+things changed or just keep nice
+
+591
+00:49:53,060 --> 00:49:58,509
+Protocol of actions you have done and record them within your git/git-annex history.
+
+592
+00:50:00,350 --> 00:50:07,539
+And the last one goes in detail in example on how to use HeuDiCon with your data sets and
+
+593
+00:50:07,730 --> 00:50:09,730
+relying on our
+
+594
+00:50:10,100 --> 00:50:14,559
+naming convention for how to name scanning sequences in the scanner.
+
+595
+00:50:15,640 --> 00:50:18,540
+I hope that you liked this presentation
+
+596
+00:50:18,540 --> 00:50:27,700
+and you liked what DataLad has to offer so I just want to summarize what DataLad does.
+
+597
+00:50:27,700 --> 00:50:30,300
+And what it does? It helps to manage and share
+
+598
+00:50:30,380 --> 00:50:34,300
+Available and your own data by a simple command line of Python interface.
+
+599
+00:50:34,880 --> 00:50:38,530
+We provide already access to over 10 terabytes of neuroimaging data
+
+600
+00:50:38,530 --> 00:50:46,269
+And we help with authentication, crawling of the websites, getting data from the archives in which it was originally distributed
+
+601
+00:50:47,000 --> 00:50:49,000
+publishing new or derived data.
+
+602
+00:50:50,000 --> 00:50:55,449
+Underneath we use regular pure Git and git-annex repository so whatever tools
+
+603
+00:50:55,450 --> 00:50:58,780
+You've got used to use you could still use them
+
+604
+00:50:58,780 --> 00:51:01,810
+And if you're an expert git and git-annex user
+
+605
+00:51:02,210 --> 00:51:03,880
+We will not limit your powers
+
+606
+00:51:03,880 --> 00:51:11,800
+You could do the same stuff what you did before with your key tanga tanga suppositories, so we also provide somewhat human
+
+607
+00:51:12,380 --> 00:51:14,360
+accessible
+
+608
+00:51:14,360 --> 00:51:22,060
+Metadata interface so in general if you want just to search for some datasets, it's quite convenient with datalad -search.
+
+609
+00:51:23,240 --> 00:51:25,070
+Documentation is growing
+
+610
+00:51:25,070 --> 00:51:28,389
+You're welcome to contribute, the project is open source.
+
+611
+00:51:29,240 --> 00:51:36,790
+I hope that after you've seen the presentation you will agree that managing data can be as simple as manage encode and software. Thank you!
+
