@@ -1,0 +1,28 @@
+* An IRC dump while investigating ability of OBS to cast straight into zoom (Mon Jan 22 11:58:49 EST 2018)
+
+11:19] <yoh_> I am using obs on Debian (19.0.3+dfsg1-1 package version).  A question: is there a way to have OBS stream video/audio directly into zoom.  I know that I could setup window grabber view, and then probably somehow mix-in audio from OBS into something zoom sees as a microphone.  But I wondered if may be OBS could provide audio / video device(s) which zoom could see and just use
+[11:19] <yoh_> by zoom I meant that zoom.us service (collaborators use it).
+[11:19] <linkmk> hello everyone
+[11:21] <@Fenrir> yoh_: There is not, no, they would need to support RTMP ingest.
+[11:21] <yoh_> background: I am preparing for a "video lecture" where I first want to play a video, and where needed pause it and interactively comment on via mic (with myself overlayed)
+[11:22] <@Fenrir> yoh_: On Windows, there's a DirectShow output plugin, which would expose OBS' preview as a webcam device, essentially
+[11:23] <@Fenrir> but there is nothing like that on Linux right now.
+[11:23] <sophie> yoh_: I just found v4l2loopback.
+[11:23] <yoh_> Fenrir: I see, thanks for the feedback.  So I will look into setting up some "mix-in" device at pulseaudio level may be to expose as "microphone" to zoom.
+[11:23] <sophie> would be veeeery hacky if that works via custom ffmpeg output
+[11:24] <yoh_> sophie: thanks, I will check it out
+[11:24] <@Fenrir> sophie: Nobody has managed to get it working.
+[11:24] <@Fenrir> Several have tried.
+[11:24] <sophie> :(
+[11:24] <@Fenrir> but, not saying it can't work
+[11:24] <OBScommits> [Forum|Kapu] Regular stutterings on preview & recorded videos https://obsproject.com/forum/threads/regular-stutterings-on-preview-recorded-videos.80031/
+[11:24] <yoh_> ah, ;-) then may be not
+[11:34] <sophie> success ... kind of
+[11:35] <sophie> custom ffmpeg output to fifo, and a separate ffmpeg process reading from that fifo and supplying the virtual webcam with data
+[11:36] <sophie> and talky.io reads from the dummy webcam
+[11:36] <sophie> yoh_: ↑
+[11:37] <sophie> yoh_: install v4l2loopback-dkms, set obs to custom ffmpeg recording, output to url /tmp/video0, matroska, rawvideo.
+[11:38] <sophie> then create a fifo buffer with "mkfifo /tmp/video0"
+[11:38] <sophie> and use this ffmpeg line to start the vidtual webcam
+[11:38] <sophie> ffmpeg -re -i /tmp/video0 -c:v rawvideo -pix_fmt yuv420p -f v4l2 /dev/video0
+[11:39] <sophie> i have to leave now unfortunately, but you can just drop questions and hilight me. I'll answer later
